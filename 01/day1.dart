@@ -3,22 +3,18 @@ import 'dart:io';
 int changeFrequency(List<int> list) => list.reduce((a, b) => a + b);
 
 int frequencyReachedTwice(List<int> list) {
-  final found = [0];
+  final found = Set.from([0]);
   var freq = 0;
   for (var next in _cycle(list)) {
     freq += next;
-    if (found.contains(freq)) {
+    if (!found.add(freq)) {
       return freq;
-    } else {
-      found.add(freq);
     }
   }
 }
 
 Iterable<T> _cycle<T>(List<T> list) sync* {
-  while (true) {
-    yield* list;
-  }
+  while (true) yield* list;
 }
 
 main() {
