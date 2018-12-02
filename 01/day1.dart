@@ -19,12 +19,9 @@ Iterable<T> _cycle<T>(List<T> list) sync* {
 
 main() {
   List<int> frequencies = File("01/input.txt")
-      .readAsStringSync()
-      .trim()
-      .split("\n")
+      .readAsLinesSync()
       .map((it) => int.parse(it))
       .toList();
-
   print(changeFrequency(frequencies));
   print(frequencyReachedTwice(frequencies));
 }
