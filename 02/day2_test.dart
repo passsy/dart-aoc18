@@ -6,21 +6,20 @@ import 'day2.dart';
 main() {
   group("part1", () {
     test('box has no doubles', () {
-      expect(Box("abcdef").withDoubles, false);
+      expect(box("abcdef").containsValue(2), false);
     });
     test('box has no triples', () {
-      expect(Box("abcdef").withTriples, false);
+      expect(box("abcdef").containsValue(3), false);
     });
     test('box has doubles', () {
-      expect(Box("bababc").withDoubles, true);
+      expect(box("bababc").containsValue(2), true);
     });
     test('box has triples', () {
-      expect(Box("bababc").withTriples, true);
+      expect(box("bababc").containsValue(3), true);
     });
-  });
-  group("part2", () {
-    test('checksum sample', () {
-      var ids = listOf([
+
+    test("checksum sample", () {
+      var ids = [
         "abcdef",
         "bababc",
         "abbcde",
@@ -28,7 +27,21 @@ main() {
         "aabcdd",
         "abcdee",
         "ababab"
-      ]);
+      ];
+      expect(checksum(ids), 12);
+    });
+  });
+  group("part2", () {
+    test('checksum sample', () {
+      var ids = [
+        "abcdef",
+        "bababc",
+        "abbcde",
+        "abcccd",
+        "aabcdd",
+        "abcdee",
+        "ababab"
+      ];
       expect(checksum(ids), 12);
     });
     test('common letters sample', () {

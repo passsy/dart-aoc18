@@ -2,35 +2,27 @@ import 'dart:io';
 
 import 'package:dart_kollection/dart_kollection.dart';
 
-int checksum(KList<String> listIds) {
-  final boxes = listIds.map((id) => Box(id));
+int checksum(List<String> listIds) {
+  final boxes = listIds.map(box);
 
   var doubles = 0;
   var triples = 0;
-  for (final box in boxes.iter) {
-    if (box.withDoubles) doubles++;
-    if (box.withTriples) triples++;
+  for (final box in boxes) {
+    if (box.containsValue(2)) doubles++;
+    if (box.containsValue(3)) triples++;
   }
   return doubles * triples;
 }
 
-class Box {
-  final String id;
-  bool withDoubles;
-  bool withTriples;
-
-  Box(this.id) {
-    final chars = listOf(id.codeUnits);
-    final groups =
-        chars.groupBy((it) => it).mapValues((entry) => entry.value.size);
-    withDoubles = groups.containsValue(2);
-    withTriples = groups.containsValue(3);
-  }
+KMap<int, int> box(String id) {
+  return listOf(id.codeUnits)
+      .groupBy((it) => it)
+      .mapValues((entry) => entry.value.size);
 }
 
-KPair<String, String> fabricPairs(KList<String> boxIds) {
-  for (final id1 in boxIds.iter) {
-    for (final id2 in boxIds.iter) {
+KPair<String, String> fabricPairs(List<String> boxIds) {
+  for (final id1 in boxIds) {
+    for (final id2 in boxIds) {
       if (id1 == id2) continue;
       var diff = 0;
       for (var i = 0; i < id1.length; i++) {
@@ -54,7 +46,7 @@ String commonLetters(KPair<String, String> pair) {
 }
 
 main() {
-  KList<String> input = listOf(File("02/input.txt").readAsLinesSync());
+  List<String> input = File("02/input.txt").readAsLinesSync();
 
   print("checksum: ${checksum(input)}");
 
