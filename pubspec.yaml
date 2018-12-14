@@ -9,6 +9,8 @@ environment:
 
 dependencies:
   test: ^1.0.0
-  dart_kollection: ^0.1.0
+
+  dart_kollection:
+    path: ../dart_kollection
 
 dev_dependencies:

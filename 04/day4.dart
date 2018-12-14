@@ -5,12 +5,20 @@ import 'package:dart_kollection/dart_kollection.dart';
 main() {
   List<String> input = File("04/input.txt").readAsLinesSync();
   final records = listOf(input).map((it) => Record.from(it));
+  final analyzedGuards = processRecords(records);
 
-  Guard sleeper = longestSleeper(records);
+  Guard sleeperPart1 = longestSleeper(analyzedGuards);
+  print("#${sleeperPart1.id} slep ${sleeperPart1.minutesAsleep()}");
+  print(
+      "Answer ${int.parse(sleeperPart1.id) * sleeperPart1.sleptMostAtMinute()}");
 
-  print("#${sleeper.id} slep ${sleeper.sleptMostAtMinute()}");
-  print("Answer ${int.parse(sleeper.id) * sleeper.sleptMostAtMinute()}");
-  // too high 173401
+  Guard sleeperPart2 = guardWithSafestSleepMinutes(analyzedGuards);
+
+  print(
+      "#${sleeperPart2.id} slept most at ${sleeperPart2.sleptMostAtMinute()}");
+
+  print(
+      "Answer ${int.parse(sleeperPart2.id) * sleeperPart2.sleptMostAtMinute()}");
 }
 
 Guard merge(KList<Guard> guards) {
@@ -27,7 +35,7 @@ Guard merge(KList<Guard> guards) {
   return guard;
 }
 
-Guard longestSleeper(KList<Record> records) {
+KList<Guard> processRecords(KList<Record> records) {
   final sorted = records.sortedBy((it) => it.day + it.time);
   final guardsPerDays = mutableListOf<Guard>();
   Guard guard;
@@ -45,11 +53,15 @@ Guard longestSleeper(KList<Record> records) {
   var map = guardsPerDays.groupBy((it) => it.id);
   final mergedDaysGuard = map.mapValues((it) => merge(it.value));
 
-  KCollection<Guard> sortedGuards = mergedDaysGuard.values
-      .sortedByDescending<num>((it) => it.minutesAsleep());
+  return mergedDaysGuard.values;
+}
 
-  var sleeper = sortedGuards.first();
-  return sleeper;
+Guard longestSleeper(KList<Guard> guards) {
+  return guards.sortedByDescending<num>((it) => it.minutesAsleep()).first();
+}
+
+Guard guardWithSafestSleepMinutes(KList<Guard> guards) {
+  return guards.sortedByDescending<num>((it) => it.sleptMostAtMinute()).first();
 }
 
 final begin = RegExp(r"\[(.*) (.*)\] Guard #(\d.*) begins shift");

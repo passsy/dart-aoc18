@@ -38,7 +38,8 @@ main() {
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up""";
     final records = listOf(input.split("\n")).map((it) => Record.from(it));
-    var sleeper = longestSleeper(records);
+    final analyzedGuards = processRecords(records);
+    var sleeper = longestSleeper(analyzedGuards);
     expect(sleeper.id, "10");
     expect(sleeper.sleptMostAtMinute(), 24);
     expect(sleeper.minutesAsleep(), 49);
