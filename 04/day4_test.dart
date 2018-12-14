@@ -42,6 +42,6 @@ main() {
     var sleeper = longestSleeper(analyzedGuards);
     expect(sleeper.id, "10");
     expect(sleeper.sleptMostAtMinute(), 24);
-    expect(sleeper.minutesAsleep(), 49);
+    expect(sleeper.minutesAsleep(), 50);
   });
 }
