@@ -159,13 +159,11 @@ class Coordinate {
 
   KSet<Coordinate> circlePoints(int radius) {
     var set = linkedSetOf<Coordinate>();
-    // TODO solve with +=
     set.add(Coordinate(x, y + radius));
     set.add(Coordinate(x, y - radius));
     set.add(Coordinate(x + radius, y));
     set.add(Coordinate(x - radius, y));
     for (int j = 1; j <= radius - 1; j++) {
-      // TODO solve with +=
       set.add(Coordinate(x + j, y + radius - j));
       set.add(Coordinate(x - j, y + radius - j));
       set.add(Coordinate(x + j, y - radius + j));
