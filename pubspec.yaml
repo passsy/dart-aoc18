@@ -13,9 +13,7 @@ dependencies:
   dart_kollection:
     git:
       url: git://github.com/passsy/dart_kollection.git
-      ref: c646537d68caa93fc2bf3b0bcdf663af09e560fc
-
-#  dart_kollection:
-#    path: ../dart_kollection
+      ref: 1a3e343b368a53e4452fa09e776abe2b2aad8026
+    #path: ../dart_kollection
 
 dev_dependencies:
