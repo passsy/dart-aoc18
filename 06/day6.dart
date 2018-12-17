@@ -19,16 +19,15 @@ main() {
 
   print("max point ${max.key}");
   print("area ${max.value}");
-  //(max as Coordinate)
 }
 
 final _doubleCoord = Coordinate(-1, -1, " .");
 
-final N = 500;
-
 KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
   final KCollection<Coordinate> finiteCoords = finiteCoordinates(allCoords);
   assert(allCoords.containsAll(finiteCoords));
+  var N = allCoords.map((c) => c.x > c.y ? c.x : c.y).max() + 1;
+
   final map = mutableListOf(List.generate(
       (N), (_) => mutableListOf(List<Coordinate>.filled(N, null))));
 
