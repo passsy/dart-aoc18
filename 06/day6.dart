@@ -19,6 +19,9 @@ main() {
 
   print("max point ${max.key}");
   print("area ${max.value}");
+
+  final safeArea = safeAreaSize(coordinates, 10000);
+  print("safe area size $safeArea");
 }
 
 final _doubleCoord = Coordinate(-1, -1, " .");
@@ -82,6 +85,17 @@ KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
       .groupBy((it) => it.name)
       .toMutableMap()
       .mapValues((entry) => entry.value.count());
+}
+
+int safeAreaSize(KCollection<Coordinate> allCoords, int maxDistance) {
+  var N = allCoords.map((c) => c.x > c.y ? c.x : c.y).max() + 1;
+
+  var points = listOf(
+      Iterable.generate(N, (y) => Iterable.generate(N, (x) => Coordinate(x, y)))
+          .expand((it) => it));
+  return points
+      .map((p) => allCoords.sumBy((c) => c.distance(p)))
+      .count((distance) => distance < maxDistance);
 }
 
 KList<Coordinate> finiteCoordinates(KCollection<Coordinate> coordinates) {

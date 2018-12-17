@@ -24,5 +24,10 @@ main() {
       var finite = finiteCoordinates(coords);
       expect(finite, listOf([d, e]));
     });
+
+    test("safe area size", () {
+      final size = safeAreaSize(coords, 32);
+      expect(size, 16);
+    });
   });
 }
