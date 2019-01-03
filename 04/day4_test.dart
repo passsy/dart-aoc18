@@ -37,7 +37,7 @@ main() {
 [1518-11-05 00:03] Guard #99 begins shift
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up""";
-    final records = listOf(input.split("\n")).map((it) => Record.from(it));
+    final records = listFrom(input.split("\n")).map((it) => Record.from(it));
     final analyzedGuards = processRecords(records);
     var sleeper = longestSleeper(analyzedGuards);
     expect(sleeper.id, "10");

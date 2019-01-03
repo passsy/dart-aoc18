@@ -4,7 +4,7 @@ import 'package:dart_kollection/dart_kollection.dart';
 
 main() {
   List<String> input = File("04/input.txt").readAsLinesSync();
-  final records = listOf(input).map((it) => Record.from(it));
+  final records = listFrom(input).map((it) => Record.from(it));
   final analyzedGuards = processRecords(records);
 
   Guard sleeperPart1 = longestSleeper(analyzedGuards);
@@ -29,7 +29,8 @@ Guard merge(KList<Guard> guards) {
     return true;
   }());
   final guard = Guard(guards[0].id);
-  guard._minutesAsleep = listOf(List.filled(60, 0)).mapIndexed((index, value) {
+  guard._minutesAsleep =
+      listFrom(List.filled(60, 0)).mapIndexed((index, value) {
     return guards.sumBy((it) => it._minutesAsleep[index]);
   });
   return guard;
@@ -123,7 +124,7 @@ class Record {
 
 class Guard {
   final String id;
-  KMutableList<int> _minutesAsleep = mutableListOf(List.filled(60, 0));
+  KMutableList<int> _minutesAsleep = mutableListFrom(List.filled(60, 0));
   var _awake = true;
   final records = mutableListOf<Record>();
   int _cursor = 0;

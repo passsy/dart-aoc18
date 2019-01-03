@@ -3,25 +3,8 @@ import 'dart:io';
 import 'package:dart_kollection/dart_kollection.dart';
 
 main() {
-  final coordinates = listOf(File("06/input.txt").readAsLinesSync())
-      .map(Coordinate.parse)
-      .toSet();
-
-  final finiteCoords = finiteCoordinates(coordinates);
-  final finiteNames = finiteCoords.map((it) => it.name);
-  print(finiteCoords.joinToString());
-
-  final areas = areaOf(coordinates);
-  print(areas);
-  final max = areas.entries
-      .filter((it) => finiteNames.contains(it.key))
-      .maxBy<num>((entry) => entry.value);
-
-  print("max point ${max.key}");
-  print("area ${max.value}");
-
-  final safeArea = safeAreaSize(coordinates, 10000);
-  print("safe area size $safeArea");
+  num i = 0;
+  i += 9;
 }
 
 final _doubleCoord = Coordinate(-1, -1, " .");
@@ -31,8 +14,8 @@ KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
   assert(allCoords.containsAll(finiteCoords));
   var N = allCoords.map((c) => c.x > c.y ? c.x : c.y).max() + 1;
 
-  final map = mutableListOf(List.generate(
-      (N), (_) => mutableListOf(List<Coordinate>.filled(N, null))));
+  final map = mutableListFrom(List.generate(
+      (N), (_) => mutableListFrom(List<Coordinate>.filled(N, null))));
 
   void printGrid() {
     final buffer = StringBuffer();
@@ -90,7 +73,7 @@ KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
 int safeAreaSize(KCollection<Coordinate> allCoords, int maxDistance) {
   var N = allCoords.map((c) => c.x > c.y ? c.x : c.y).max() + 1;
 
-  var points = listOf(
+  var points = listFrom(
       Iterable.generate(N, (y) => Iterable.generate(N, (x) => Coordinate(x, y)))
           .expand((it) => it));
   return points
@@ -159,6 +142,7 @@ class Coordinate {
 
   KSet<Coordinate> circlePoints(int radius) {
     var set = linkedSetOf<Coordinate>();
+
     set.add(Coordinate(x, y + radius));
     set.add(Coordinate(x, y - radius));
     set.add(Coordinate(x + radius, y));

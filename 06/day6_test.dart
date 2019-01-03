@@ -11,7 +11,7 @@ main() {
     var d = Coordinate(3, 4, "D");
     var e = Coordinate(5, 5, "E");
     var f = Coordinate(8, 9, "F");
-    final coords = listOf([a, b, c, d, e, f]);
+    final coords = listOf(a, b, c, d, e, f);
 
     test("area of D is 9", () {
       final areas = areaOf(coords);
@@ -22,12 +22,18 @@ main() {
 
     test("detect finite coords", () {
       var finite = finiteCoordinates(coords);
-      expect(finite, listOf([d, e]));
+      expect(finite, listOf(d, e));
     });
 
     test("safe area size", () {
       final size = safeAreaSize(coords, 32);
       expect(size, 16);
     });
+  });
+
+  test("filterTo", () {
+    final other = mutableListOf<String>();
+    listOf("a", "b", "c").filterTo(other, (_) => true);
+    expect(other, listOf("a", "b", "c"));
   });
 }

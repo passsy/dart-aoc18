@@ -15,7 +15,7 @@ int checksum(List<String> listIds) {
 }
 
 KMap<int, int> box(String id) {
-  return listOf(id.codeUnits)
+  return listFrom(id.codeUnits)
       .groupBy((it) => it)
       .mapValues((entry) => entry.value.size);
 }
@@ -40,8 +40,8 @@ KPair<String, String> fabricPairs(List<String> boxIds) {
 }
 
 String commonLetters(KPair<String, String> pair) {
-  var c1 = listOf(pair.first.runes);
-  var c2 = listOf(pair.second.runes);
+  var c1 = listFrom(pair.first.runes);
+  var c2 = listFrom(pair.second.runes);
   return String.fromCharCodes(c1.filter((it) => c2.contains(it)).iter);
 }
 

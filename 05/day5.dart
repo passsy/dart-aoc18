@@ -4,12 +4,12 @@ import 'package:dart_kollection/dart_kollection.dart';
 
 main() {
   KList<String> polymer =
-      listOf(File("05/input.txt").readAsLinesSync().first.split(""));
+      listFrom(File("05/input.txt").readAsLinesSync().first.split(""));
   final result = reducePolymer(polymer);
   print("reduced length: ${result.length}");
 
   final abc =
-      listOf(Iterable.generate(24).map((i) => String.fromCharCode(i + 97)));
+      listFrom(Iterable.generate(24).map((i) => String.fromCharCode(i + 97)));
 
   final tests = abc.associateWith((unit) {
     final p = reducePolymer(polymer.filter((it) => it.toLowerCase() != unit));

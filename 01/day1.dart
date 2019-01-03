@@ -1,9 +1,11 @@
 import 'dart:io';
 
-int changeFrequency(List<int> list) => list.reduce((a, b) => a + b);
+import 'package:dart_kollection/dart_kollection.dart';
 
-int frequencyReachedTwice(List<int> list) {
-  final found = Set.from([0]);
+int changeFrequency(KList<int> list) => list.reduce((a, b) => a + b);
+
+int frequencyReachedTwice(KList<int> list) {
+  final found = hashSetOf(0);
   var freq = 0;
   for (var next in _cycle(list)) {
     freq += next;
@@ -13,15 +15,13 @@ int frequencyReachedTwice(List<int> list) {
   }
 }
 
-Iterable<T> _cycle<T>(List<T> list) sync* {
-  while (true) yield* list;
+Iterable<T> _cycle<T>(KList<T> list) sync* {
+  while (true) yield* list.iter;
 }
 
 main() {
-  List<int> frequencies = File("01/input.txt")
-      .readAsLinesSync()
-      .map((it) => int.parse(it))
-      .toList();
+  KList<int> frequencies = listFrom(File("01/input.txt").readAsLinesSync())
+      .map((it) => int.parse(it));
   print(changeFrequency(frequencies));
   print(frequencyReachedTwice(frequencies));
 }
