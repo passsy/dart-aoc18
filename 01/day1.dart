@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:dart_kollection/dart_kollection.dart';
+import 'package:kotlin_dart/collection.dart';
 
-int changeFrequency(KList<int> list) => list.reduce((a, b) => a + b);
+int changeFrequency(KtList<int> list) => list.reduce((a, b) => a + b);
 
-int frequencyReachedTwice(KList<int> list) {
+int frequencyReachedTwice(KtList<int> list) {
   final found = hashSetOf(0);
   var freq = 0;
   for (var next in _cycle(list)) {
@@ -15,12 +15,12 @@ int frequencyReachedTwice(KList<int> list) {
   }
 }
 
-Iterable<T> _cycle<T>(KList<T> list) sync* {
+Iterable<T> _cycle<T>(KtList<T> list) sync* {
   while (true) yield* list.iter;
 }
 
 main() {
-  KList<int> frequencies = listFrom(File("01/input.txt").readAsLinesSync())
+  KtList<int> frequencies = listFrom(File("01/input.txt").readAsLinesSync())
       .map((it) => int.parse(it));
   print(changeFrequency(frequencies));
   print(frequencyReachedTwice(frequencies));

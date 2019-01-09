@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:dart_kollection/dart_kollection.dart';
+import 'package:kotlin_dart/collection.dart';
 
 main() {
-  KList<String> polymer =
+  KtList<String> polymer =
       listFrom(File("05/input.txt").readAsLinesSync().first.split(""));
   final result = reducePolymer(polymer);
   print("reduced length: ${result.length}");
@@ -24,9 +24,9 @@ main() {
   print("shortest polymer ${shortest.second}");
 }
 
-String reducePolymer(KList<String> polymer) {
+String reducePolymer(KtList<String> polymer) {
   return polymer.fold(mutableListOf<String>(),
-      (KMutableList<String> list, String unit) {
+      (KtMutableList<String> list, String unit) {
     final last = list.lastOrNull();
     if (unit != last && unit.toUpperCase() == last?.toUpperCase()) {
       return list.dropLast(1).toMutableList();

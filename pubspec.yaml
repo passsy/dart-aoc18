@@ -10,10 +10,12 @@ environment:
 dependencies:
   test: ^1.0.0
 
-  dart_kollection:
+  kotlin_dart:
     git:
-      url: git://github.com/passsy/dart_kollection.git
-      ref: 75150bc3e7085176c9ef9005f6630b314be25dff
-#    path: ../dart_kollection
+      url: git://github.com/passsy/kotlin.dart.git
+      ref: dde775c03993924bf88962c012ce7743374a1172
+
+#  kotlin_dart:
+#    path: ../kotlin.dart
 
 dev_dependencies:

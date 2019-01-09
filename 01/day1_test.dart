@@ -1,4 +1,4 @@
-import 'package:dart_kollection/dart_kollection.dart';
+import 'package:kotlin_dart/collection.dart';
 import 'package:test/test.dart';
 
 import 'day1.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dart_kollection/dart_kollection.dart';
+import 'package:kotlin_dart/collection.dart';
 
 main() {
   List<String> input = File("04/input.txt").readAsLinesSync();
@@ -21,7 +21,7 @@ main() {
       "Answer ${int.parse(sleeperPart2.id) * sleeperPart2.sleptMostAtMinute()}");
 }
 
-Guard merge(KList<Guard> guards) {
+Guard merge(KtList<Guard> guards) {
   assert(() {
     if (guards.map((it) => it.id).toSet().size != 1) {
       throw "not all guards have the same id";
@@ -36,7 +36,7 @@ Guard merge(KList<Guard> guards) {
   return guard;
 }
 
-KList<Guard> processRecords(KList<Record> records) {
+KtList<Guard> processRecords(KtList<Record> records) {
   final sorted = records.sortedBy((it) => it.day + it.time);
   final guardsPerDays = mutableListOf<Guard>();
   Guard guard;
@@ -57,11 +57,11 @@ KList<Guard> processRecords(KList<Record> records) {
   return mergedDaysGuard.values;
 }
 
-Guard longestSleeper(KList<Guard> guards) {
+Guard longestSleeper(KtList<Guard> guards) {
   return guards.sortedByDescending<num>((it) => it.minutesAsleep()).first();
 }
 
-Guard guardWithSafestSleepMinutes(KList<Guard> guards) {
+Guard guardWithSafestSleepMinutes(KtList<Guard> guards) {
   return guards.sortedByDescending<num>((it) => it.sleptMostAtMinute()).first();
 }
 
@@ -124,7 +124,7 @@ class Record {
 
 class Guard {
   final String id;
-  KMutableList<int> _minutesAsleep = mutableListFrom(List.filled(60, 0));
+  KtMutableList<int> _minutesAsleep = mutableListFrom(List.filled(60, 0));
   var _awake = true;
   final records = mutableListOf<Record>();
   int _cursor = 0;

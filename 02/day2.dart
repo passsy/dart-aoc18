@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dart_kollection/dart_kollection.dart';
+import 'package:kotlin_dart/collection.dart';
 
 int checksum(List<String> listIds) {
   final boxes = listIds.map(box);
@@ -14,7 +14,7 @@ int checksum(List<String> listIds) {
   return doubles * triples;
 }
 
-KMap<int, int> box(String id) {
+KtMap<int, int> box(String id) {
   return listFrom(id.codeUnits)
       .groupBy((it) => it)
       .mapValues((entry) => entry.value.size);

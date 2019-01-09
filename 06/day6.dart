@@ -1,16 +1,9 @@
-import 'dart:io';
-
-import 'package:dart_kollection/dart_kollection.dart';
-
-main() {
-  num i = 0;
-  i += 9;
-}
+import 'package:kotlin_dart/collection.dart';
 
 final _doubleCoord = Coordinate(-1, -1, " .");
 
-KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
-  final KCollection<Coordinate> finiteCoords = finiteCoordinates(allCoords);
+KtMap<String, int> areaOf(KtCollection<Coordinate> allCoords) {
+  final KtCollection<Coordinate> finiteCoords = finiteCoordinates(allCoords);
   assert(allCoords.containsAll(finiteCoords));
   var N = allCoords.map((c) => c.x > c.y ? c.x : c.y).max() + 1;
 
@@ -37,7 +30,7 @@ KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
     print("radius $radius");
     //printGrid();
     radius++;
-    KMutableList<Coordinate> thisRoundAdded = mutableListOf<Coordinate>();
+    KtMutableList<Coordinate> thisRoundAdded = mutableListOf<Coordinate>();
 
     for (final coord in allCoords.iter) {
       final circlePoints = coord.circlePoints(radius);
@@ -70,7 +63,7 @@ KMap<String, int> areaOf(KCollection<Coordinate> allCoords) {
       .mapValues((entry) => entry.value.count());
 }
 
-int safeAreaSize(KCollection<Coordinate> allCoords, int maxDistance) {
+int safeAreaSize(KtCollection<Coordinate> allCoords, int maxDistance) {
   var N = allCoords.map((c) => c.x > c.y ? c.x : c.y).max() + 1;
 
   var points = listFrom(
@@ -81,7 +74,7 @@ int safeAreaSize(KCollection<Coordinate> allCoords, int maxDistance) {
       .count((distance) => distance < maxDistance);
 }
 
-KList<Coordinate> finiteCoordinates(KCollection<Coordinate> coordinates) {
+KtList<Coordinate> finiteCoordinates(KtCollection<Coordinate> coordinates) {
   return coordinates.filter((point) {
     if (point.overflowsRight(coordinates)) {
       print("$point overflows right");
@@ -140,7 +133,7 @@ class Coordinate {
         int.parse(split[0]), int.parse(split[1]), (++_uniqueIndex).toString());
   }
 
-  KSet<Coordinate> circlePoints(int radius) {
+  KtSet<Coordinate> circlePoints(int radius) {
     var set = linkedSetOf<Coordinate>();
 
     set.add(Coordinate(x, y + radius));
@@ -161,7 +154,7 @@ class Coordinate {
     return (x - other.x).abs() + (y - other.y).abs();
   }
 
-  bool overflowsRight(KCollection<Coordinate> set) {
+  bool overflowsRight(KtCollection<Coordinate> set) {
     final rightOf = set.filter((coord) {
       var dx = coord.x - x;
       var dy = coord.y - y;
@@ -171,7 +164,7 @@ class Coordinate {
     return rightOf.isEmpty();
   }
 
-  bool overflowsLeft(KCollection<Coordinate> set) {
+  bool overflowsLeft(KtCollection<Coordinate> set) {
     final leftOf = set.filter((coord) {
       var dx = coord.x - x;
       var dy = coord.y - y;
@@ -181,7 +174,7 @@ class Coordinate {
     return leftOf.isEmpty();
   }
 
-  bool overflowsBottom(KCollection<Coordinate> set) {
+  bool overflowsBottom(KtCollection<Coordinate> set) {
     final bottomOf = set.filter((coord) {
       var dx = coord.x - x;
       var dy = coord.y - y;
@@ -191,7 +184,7 @@ class Coordinate {
     return bottomOf.isEmpty();
   }
 
-  bool overflowsTop(KCollection<Coordinate> set) {
+  bool overflowsTop(KtCollection<Coordinate> set) {
     final topOf = set.filter((coord) {
       var dx = coord.x - x;
       var dy = coord.y - y;
